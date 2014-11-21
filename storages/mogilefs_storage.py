@@ -65,7 +65,9 @@ class Storage(BaseStorage):
         return loads(data)
 
     def get(self, path):
-        return self.storage.get_file_data(path) is not None
+        if not self.storage.get_file_data(path):
+            return None
+        return self.storage.get_file_data(path)
 
     def exists(self, path):
         return self.storage.keys(path) is not None
